@@ -62,7 +62,7 @@ public class SpartanTestsWithHamcrest {
                                             ,"gender",Matchers.equalTo("Female")
                                             ,"phone",Matchers.equalTo(9672110769l) ) ;
     }
-
+// added line
     @Test
     public void practice2 () {
         RestAssured.given().accept(ContentType.JSON).pathParam("id",141)
