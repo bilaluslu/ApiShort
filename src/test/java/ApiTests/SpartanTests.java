@@ -1,18 +1,25 @@
 package ApiTests;
 
 import io.restassured.RestAssured;
+
 import io.restassured.http.ContentType;
 import io.restassured.response.Response;
 import org.testng.Assert;
+
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 public class SpartanTests {
 
-    String spartanBaseUrl = "http://34.224.4.31:8000";
+    @BeforeClass
+    public void setUp(){
+        RestAssured.baseURI = "http://34.224.4.31:8000";
+    }
+
 
     @Test
     public void viewSpartanTest1(){
-        Response response = RestAssured.get(spartanBaseUrl + "/api/spartans");
+        Response response = RestAssured.get("/api/spartans");
 
         // print status code
         System.out.println("statusCode = " + response.statusCode());
@@ -31,7 +38,7 @@ public class SpartanTests {
     //and body should contain ...
     @Test
     public void viewSpartanTest2(){
-        Response response = RestAssured.get(spartanBaseUrl + "/api/spartans");
+        Response response = RestAssured.get("/api/spartans");
 
         // print status code
         System.out.println("statusCode = " + response.statusCode());
@@ -49,7 +56,7 @@ public class SpartanTests {
     @Test
     public void viewSpartanTest3(){
         Response response = RestAssured.given().accept(ContentType.JSON)
-                            .when().get(spartanBaseUrl + "/api/spartans");
+                            .when().get("/api/spartans");
 
         // verifying status code
         System.out.println("statusCode = " + response.statusCode());

@@ -41,6 +41,7 @@ public class SpartanJsonToCollections {
         System.out.println( spartanMap.get("id") );
         System.out.println( spartanMap.get("name") );
         System.out.println( spartanMap.get("gender") );
+        
 
         // example verification one side map / expected result
         Assert.assertEquals( spartanMap.get("name") , "Nona" );

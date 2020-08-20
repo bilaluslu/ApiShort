@@ -2,12 +2,16 @@ package ApiTests;
 
 import io.restassured.RestAssured;
 import io.restassured.http.ContentType;
+import io.restassured.path.json.JsonPath;
 import io.restassured.response.Response;
+import io.restassured.response.ValidatableResponse;
+import org.hamcrest.Matchers;
 import org.testng.Assert;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class Practice {
@@ -91,6 +95,48 @@ public class Practice {
                 .when().get("/api/spartans/search");
 
         response.prettyPrint();
+    }
+
+    @Test
+    public void practice6(){
+        Response response = RestAssured.given().accept(ContentType.JSON)
+                .pathParam("id",10)
+                .when().get("/api/spartans/{id}");
+
+        System.out.println("printing = " + response.body().path("name").toString() );
+    }
+
+    @Test
+    public void practice7(){
+        Response response = RestAssured.given().accept(ContentType.JSON)
+                .when().get("/api/spartans");
+
+        List<String> allNames = response.path("name");
+        System.out.println( allNames );
+    }
+
+    @Test
+    public void practice8(){
+        Response response = RestAssured.given().accept(ContentType.JSON)
+                .pathParam("id",15)
+                .when().get("/api/spartans/{id}");
+
+        JsonPath jsonPath = response.jsonPath();
+        int id = jsonPath.getInt("id");
+        System.out.println( id );
+    }
+
+    @Test
+    public void practice9(){
+        RestAssured.given().accept(ContentType.JSON)
+                .and().pathParam("id", 23)
+                .when().get("/api/spartans/{id}")
+                .then().assertThat().statusCode(200)
+                .and().assertThat().contentType("application/json;charset=UTF-8")
+                .and().assertThat().body("gender", Matchers.equalTo("Male"))
+                .and().assertThat().body("id", Matchers.equalTo(23))
+                .and().assertThat().body("name" , Matchers.equalTo("Bilal Updated"));
+
     }
 
 
