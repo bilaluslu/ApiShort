@@ -37,10 +37,17 @@ public class PracticeWithEmrah {
         System.out.println( "statusCode = " + response.statusCode() );
         System.out.println( "content type = " + response.contentType() );
 
+
+
         String id = response.path("id").toString();
         String name = response.path("name").toString();
         String gender = response.path("gender").toString();
         String phone = response.path("phone").toString();
+
+        Assert.assertEquals("25" , id );
+        Assert.assertEquals("Valentin" , name );
+        Assert.assertEquals("Male" , gender );
+        Assert.assertEquals("1536037088" , phone );
 
         System.out.println( "id = " + id);
         System.out.println( "name = " + name);

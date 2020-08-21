@@ -25,7 +25,7 @@ public class Practice {
     public void practice1(){
         Response response = RestAssured.given().accept(ContentType.JSON)
                 .and().pathParam("id", 16)
-                .when().get("api/spartans/{id}");
+                .when().get("/api/spartans/{id}");
 
         System.out.println("response.statusCode() = " + response.statusCode());
         System.out.println("response.contentType() = " + response.contentType());
@@ -130,12 +130,14 @@ public class Practice {
     public void practice9(){
         RestAssured.given().accept(ContentType.JSON)
                 .and().pathParam("id", 23)
+                .log().all()
                 .when().get("/api/spartans/{id}")
                 .then().assertThat().statusCode(200)
                 .and().assertThat().contentType("application/json;charset=UTF-8")
                 .and().assertThat().body("gender", Matchers.equalTo("Male"))
                 .and().assertThat().body("id", Matchers.equalTo(23))
                 .and().assertThat().body("name" , Matchers.equalTo("Bilal Updated"));
+
 
     }
 

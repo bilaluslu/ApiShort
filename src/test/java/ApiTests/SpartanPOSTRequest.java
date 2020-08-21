@@ -12,7 +12,7 @@ import org.testng.annotations.Test;
 import java.util.HashMap;
 import java.util.Map;
 
-public class SpartanPostRequest {
+public class SpartanPOSTRequest {
 
     @BeforeClass
     public void setUp(){
